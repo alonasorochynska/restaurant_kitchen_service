@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block content %}
+  {% if user == worker %}
+    <h1>Hello, {{ worker.username }} 😀</h1>
+  {% else %}
+    <h1>Worker {{ worker.username }}</h1>
+  {% endif %}
+  <hr>
+  <h4>Personal information</h4>
+  <table class="table">
+    <tr>
+      <th>First name</th>
+      <th>Last name</th>
+      <th>Position</th>
+      <th>Admin</th>
+      <th>Kitchen</th>
+    </tr>
+    <tr>
+      <td>{{ worker.first_name }}</td>
+      <td>{{ worker.last_name }}</td>
+      <td>{{ worker.position }}</td>
+      <td>{% if worker.position.lead_position %}✅{% else %}✖️{% endif %}</td>
+      <td>{% if worker.position.kitchen %}✅{% else %}✖️{% endif %}</td>
+    </tr>
+  </table>
+  <hr>
+  <div class="ml-3">
+    {% if user == worker %}
+      <h4>My orders</h4>
+    {% else %}
+      <h4>Orders</h4>
+    {% endif %}
+
+    {% if worker.orders.all %}
+      <table class="table">
+        <tr>
+          <th>ID</th>
+          <th>Dishes</th>
+          <th>Ready</th>
+          <th>Deadline</th>
+          <th>Created</th>
+          <th>Details</th>
+          <th>Actions</th>
+        </tr>
+        {% for order in worker.orders.all %}
+          <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.get_dish_names }}</td>
+            <td>{% if order.is_completed %}✅{% else %}❌{% endif %}</td>
+            <td>
+              {% if order.is_completed_in_time %}
+                ✅
+              {% elif order.completion_time %}
+                <b>{{ order.completion_time }}</b> min
+              {% else %}
+                ❌
+              {% endif %}
+            </td>
+            {% load humanize %}
+            <td>{{ order.creation_time|naturalday }}</td>
+            <td><a href="{{ order.get_absolute_url }}" class="btn btn-primary">DETAILS</a></td>
+            <td>
+
+              {% if not order.is_completed %}
+                <a href="{% url 'kitchen:order-complete' pk=order.id %}" class="btn btn-success">COMPLETE</a>
+              {% else %}
+                -
+              {% endif %}
+            </td>
+          </tr>
+        {% endfor %}
+      </table>
+      <hr>
+    {% else %}
+      <p>No orders!</p>
+    {% endif %}
+  </div>
+  <a href="{% url "kitchen:worker-list" %}" class="btn btn-outline-primary">CANCEL</a>
+  <a href="{% url 'kitchen:worker-update' pk=worker.id %}" class="btn btn-success">UPDATE</a>
+  <a href="{% url 'kitchen:worker-delete' pk=worker.id %}" class="btn btn-danger">DELETE</a>
+{% endblock %}

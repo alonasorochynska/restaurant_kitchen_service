@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Delete Worker: {{ worker }}</h1>
+  {% if not worker.orders.all %}
+
+    <div>
+      <p class="alert alert-warning alert-dismissible fade show" role="alert">
+        Are you sure you want to delete worker <b>{{ worker }}</b> from database?
+      </p>
+    </div>
+    <form action="" method="post">
+      {% csrf_token %}
+      <a href="{% url "kitchen:worker-list" %}" class="btn btn-outline-primary">CANCEL</a>
+      <input type="submit" value="DELETE" class="btn btn-danger">
+    </form>
+  {% else %}
+    <p class="alert alert-warning alert-dismissible fade show" role="alert">You can not delete worker with available orders!</p>
+    <p>List of existing orders for {{ worker }}:</p>
+    {% for order in worker.orders.all %}
+      <p>Order id: {{ order.id }}</p>
+    {% endfor %}
+    <a href="{% url "kitchen:position-list" %}" class="btn btn-outline-primary">CANCEL</a>
+  {% endif %}
+
+{% endblock %}
