@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <table>
+    <tr>
+      <td><h1>List of orders</h1></td>
+      <td width="20"></td>
+      <td><a href="{% url 'kitchen:order-create' %}" class="btn btn-primary">CREATE ORDER</a></td>
+      <td>
+        <form method="get" action="" class="form-inline">
+          {{ search_form.worker|as_crispy_field }}
+          <input class="btn btn-secondary" type="submit" value="⌕">
+        </form>
+      </td>
+      <td><form method="get" action="" class="form-inline">
+          {{ search_form.creation_date|as_crispy_field }}
+          <input class="btn btn-secondary" type="submit" value="⌕">
+        </form></td>
+    </tr>
+  </table>
+
+  {% if order_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Dishes</th>
+        <th>Owner</th>
+        <th>Creation time</th>
+        <th>Status</th>
+        <th>Deadline</th>
+        <th>In&nbsp;time</th>
+        <th>Details</th>
+      </tr>
+      {% for order in order_list %}
+        <tr>
+          <td>{{ order.id }}</td>
+          <td>{{ order.get_dish_names }}</td>
+          <td><a href="{{ order.worker.get_absolute_url }}">
+            {{ order.worker }} {% if user == order.worker %} 😀{% endif %}
+          </a></td>
+          <td>{{ order.creation_time }}</td>
+          <td>{% if order.is_completed %}✅{% else %}❌{% endif %}</td>
+
+          <td>
+            {% if order.is_completed_in_time %}
+              ✅
+            {% elif order.completion_time %}
+              <b>{{ order.completion_time }}</b> min
+            {% else %}
+              ❌
+            {% endif %}
+          </td>
+          <th>{% if order.is_completed_in_time %}
+            ✅
+          {% elif not order.is_completed and order.completion_time %}
+            -
+          {% else %}
+            ❌
+          {% endif %}</th>
+          <td><a href="{{ order.get_absolute_url }}" class="btn btn-primary">DETAILS</a></td>
+        </tr>
+      {% endfor %}
+
+    </table>
+  {% else %}
+    <p>There are no orders!</p>
+  {% endif %}
+{% endblock %}

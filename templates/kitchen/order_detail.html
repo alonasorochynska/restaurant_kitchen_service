@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Order ID: {{ order.id }}</h1>
+  <hr>
+  <p><strong>Dishes: </strong>{{ order.get_dish_names }}</p>
+  <p><strong>Owner: </strong>
+    <a href="{{ order.worker.get_absolute_url }}">{{ order.worker }}</a>
+    {% if user == order.worker %} 😀{% endif %}
+  </p>
+  <p><strong>Status: </strong>{% if order.is_completed %}✅{% else %}❌{% endif %}</p>
+  <p><strong>Creation time: </strong>{{ order.creation_time }}</p>
+  <p><strong>Deadline: </strong>
+    {% if order.completion_time %}<b>{{ order.completion_time }}</b> min{% else %}❌{% endif %}
+  </p>
+  <p><strong>Notes:</strong> {% if order.note %}{{ order.note }}{% else %}✖️{% endif %}</p>
+
+  <a href="{% url "kitchen:order-list" %}" class="btn btn-outline-primary">CANCEL</a>
+  <a href="{% url "kitchen:order-update" pk=order.id %}" class="btn btn-success">UPDATE</a>
+  <a href="{% url "kitchen:order-complete" pk=order.id %}" class="btn btn-primary">ACTION</a>
+  <a href="{% url "kitchen:order-delete" pk=order.id %}" class="btn btn-danger">DELETE</a>
+{% endblock %}
