@@ -13,6 +13,9 @@
   <p><strong>Deadline: </strong>
     {% if order.completion_time %}<b>{{ order.completion_time }}</b> min{% else %}❌{% endif %}
   </p>
+  <p><strong>Completed in time: </strong>
+    {% if order.is_completed_in_time %}✅{% else %}❌{% endif %}
+  </p>
   <p><strong>Notes:</strong> {% if order.note %}{{ order.note }}{% else %}✖️{% endif %}</p>
 
   <a href="{% url "kitchen:order-list" %}" class="btn btn-outline-primary">CANCEL</a>

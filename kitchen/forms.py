@@ -78,6 +78,10 @@ class OrderCreateForm(forms.ModelForm):
         model = Order
         fields = ("dishes", "note", "worker", "deadline")
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['worker'].queryset = Worker.objects.filter(position__kitchen=True)
+
 
 class OrderUpdateForm(forms.ModelForm):
     class Meta:

@@ -9,7 +9,7 @@ from .forms import (WorkerCreationForm, WorkerUpdateForm,
                     OrderCreateForm, OrderUpdateForm, WorkerSearchForm, PositionSearchForm, OrderSearchForm,
                     DishSearchForm)
 
-from .mixins import LeadPositionRequiredMixin, KitchenPositionRequiredMixin, NotKitchenPositionRequiredMixin
+from .mixins import LeadPositionRequiredMixin, KitchenPositionRequiredMixin
 
 from .models import Worker, Order, Dish, Position
 
@@ -34,10 +34,7 @@ def index(request):
     return render(request, "kitchen/index.html", context=context)
 
 
-class CompleteOrderView(LoginRequiredMixin,
-                        LeadPositionRequiredMixin,
-                        NotKitchenPositionRequiredMixin,
-                        generic.TemplateView):
+class CompleteOrderView(LoginRequiredMixin, KitchenPositionRequiredMixin, generic.TemplateView):
     template_name = "kitchen/order_complete.html"
 
     def get_context_data(self, **kwargs):
@@ -193,7 +190,7 @@ class DishDeleteView(LoginRequiredMixin, LeadPositionRequiredMixin, generic.Dele
     success_url = reverse_lazy("kitchen:dish-list")
 
 
-class OrderCreateView(LoginRequiredMixin, NotKitchenPositionRequiredMixin, generic.CreateView):
+class OrderCreateView(LoginRequiredMixin, generic.CreateView):
     model = Order
     form_class = OrderCreateForm
     success_url = reverse_lazy("kitchen:order-list")
