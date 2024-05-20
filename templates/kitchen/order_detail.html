@@ -19,7 +19,9 @@
   <p><strong>Notes:</strong> {% if order.note %}{{ order.note }}{% else %}✖️{% endif %}</p>
 
   <a href="{% url "kitchen:order-list" %}" class="btn btn-outline-primary">CANCEL</a>
-  <a href="{% url "kitchen:order-update" pk=order.id %}" class="btn btn-success">UPDATE</a>
-  <a href="{% url "kitchen:order-complete" pk=order.id %}" class="btn btn-primary">ACTION</a>
-  <a href="{% url "kitchen:order-delete" pk=order.id %}" class="btn btn-danger">DELETE</a>
+  {% if not order.is_completed %}
+    <a href="{% url "kitchen:order-update" pk=order.id %}" class="btn btn-success">UPDATE</a>
+    <a href="{% url "kitchen:order-complete" pk=order.id %}" class="btn btn-primary">ACTION</a>
+    <a href="{% url "kitchen:order-delete" pk=order.id %}" class="btn btn-danger">DELETE</a>
+  {% endif %}
 {% endblock %}
