@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Current order ID {{ order.id }}</h1>
+  <hr>
+  <h4>Order details</h4>
+  <table class="table">
+    <tr>
+      <th>Dishes</th>
+      <th>Owner</th>
+      <th>Status</th>
+      <th>Creation time</th>
+      <th>Deadline</th>
+    </tr>
+    <tr>
+      <td>{{ order.get_dish_names }}</td>
+      <td>
+        <a href="{{ order.worker.get_absolute_url }}">{{ order.worker }}</a>
+        {% if user == order.worker %} 😀{% endif %}
+      </td>
+      <td>{% if order.is_completed %}✅{% else %}❌{% endif %}</td>
+      <td>{{ order.creation_time }}</td>
+      <td>{% if order.completion_time %}<b>{{ order.completion_time }}</b> min{% else %}❌{% endif %}</td>
+    </tr>
+  </table>
+  <hr>
+
+  <form method="post" action="{% url "kitchen:order-complete" pk=order.id %}">
+    {% csrf_token %}
+    <a href="{% url "kitchen:worker-detail" pk=order.worker.id %}" class="btn btn-outline-primary">CANCEL</a>
+    {% if order.worker == user %}
+      <button type="submit" name="action" value="complete" class="btn btn-success">COMPLETE</button>
+    {% else %}
+      <button type="submit" name="action" value="claim" class="btn btn-danger">CLAIM</button>
+    {% endif %}
+</form>
+
+{% endblock %}

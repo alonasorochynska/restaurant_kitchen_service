@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <table>
+    <tr>
+      <td><h1>List of present positions</h1></td>
+      <td width="20"></td>
+      <td><a href="{% url 'kitchen:position-create' %}" class="btn btn-primary">ADD NEW POSITION</a></td>
+      <td>
+        <form method="get" action="" class="form-inline">
+          {{ search_form|crispy }}
+          <input class="btn btn-secondary" type="submit" value="⌕">
+        </form>
+      </td>
+    </tr>
+  </table>
+
+  {% if position_list %}
+    <table class="table">
+      <tr>
+        <th>Position</th>
+        <th>Admin</th>
+        <th>Kitchen</th>
+      </tr>
+      {% for position in position_list %}
+        <tr>
+          <td>
+            <a href="{{ position.get_absolute_url }}">{{ position.name }}</a>
+          </td>
+          <td>{% if position.lead_position %}✅{% else %}✖️{% endif %}</td>
+          <td>{% if position.kitchen %}✅{% else %}✖️{% endif %}</td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There are no positions yet!</p>
+  {% endif %}
+{% endblock %}

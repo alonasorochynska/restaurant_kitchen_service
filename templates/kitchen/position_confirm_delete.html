@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Delete position: {{ position }}</h1>
+  <div>
+    <p class="alert alert-warning alert-dismissible fade show" role="alert">
+      Are you sure you want to delete position <b>{{ position }}</b> from database?
+    </p>
+  </div>
+  {% if position.workers.all %}
+    <p class="alert alert-danger" role="alert">You will also delete all workers with this position:</p>
+    {% for worker in position.workers.all %}
+      <p><a href="{{ worker.get_absolute_url }}">{{ worker.username }}</a></p>
+    {% endfor %}
+  {% endif %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <a href="{% url "kitchen:position-list" %}" class="btn btn-outline-primary">CANCEL</a>
+    <input type="submit" value="DELETE" class="btn btn-danger">
+  </form>
+
+{% endblock %}

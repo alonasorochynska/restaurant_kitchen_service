@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Restaurant Kitchen Service Home</h1>
+  <hr>
+<p>This is the Best Kitchen Service Ever!</p>
+<h2>What we have</h2>
+<p>Information about our service in details:</p>
+<ul>
+  <li><strong>Workers: </strong>{{ num_workers }}</li>
+  <li><strong>Positions: </strong>{{ num_positions }}</li>
+  <li><strong>Dishes: </strong>{{ num_dishes }}</li>
+  <li><strong>Orders: </strong>{{ num_orders }}</li>
+  <li><strong>Completed in time orders: </strong>{{ completed_in_time }}</li>
+</ul>
+{% endblock %}
