@@ -4,7 +4,10 @@ The restaurant_kitchen_service project is designed to demonstrate the working re
 ## Project Overview
 This project models a restaurant kitchen's operations with four main components: Worker, Position, Dish, and Order.
 
-![model.jpeg](model.jpeg)
+<img src="model.jpeg" alt="drawing" style="width:50%"/></img>
+
+<a href="https://www.loom.com/share/306988a1914742fb97bc7f355b7ac164?sid=31640267-2cd9-46f2-9c1c-d9a7b9a6f89e">
+loom demonstration of interface</a>
 
 ## Features
 ### User and Position Management
@@ -33,35 +36,35 @@ Comprehensive tests have been written for both custom and core project features 
 
 ## Getting Started
 * Clone the repository:
-
+```
 git clone https://github.com/yourusername/restaurant_kitchen_service.git
 cd restaurant_kitchen_service
-
+```
 * Install dependencies:
-
+```
 pip install -r requirements.txt
-
+```
 * Apply migrations:
-
+```
 python manage.py migrate
-
+```
 * Create a superuser:
-
+```
 python manage.py createsuperuser
-
+```
 * Run the development server:
-
+```
 python manage.py runserver
-
+```
 * Access the application:
 
 Open your web browser and go to http://127.0.0.1:8000/
 
 ## Tests
 To run the tests, execute the following command:
-
+```
 python manage.py test
-
+```
 ## Conclusion
 Enjoy exploring the restaurant_kitchen_service application. Add orders, create new positions, and manage your kitchen efficiently!
 
