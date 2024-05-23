@@ -4,7 +4,10 @@ The restaurant_kitchen_service project is designed to demonstrate the working re
 ## Project Overview
 This project models a restaurant kitchen's operations with four main components: Worker, Position, Dish, and Order.
 
-<img src="model.jpeg" alt="drawing" style="width:50%"/>
+<img src="model.jpeg" alt="drawing" style="width:50%"/></img>
+
+<a href="https://www.loom.com/share/306988a1914742fb97bc7f355b7ac164?sid=31640267-2cd9-46f2-9c1c-d9a7b9a6f89e">
+loom demonstration of interface</a>
 
 ## Features
 ### User and Position Management
