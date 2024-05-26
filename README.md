@@ -38,6 +38,11 @@ Comprehensive tests have been written for both custom and core project features 
 
 [Restaurant Kitchen project deployed to Render](https://restaurant-kitchen-service-a082.onrender.com/)
 
+Use the following credentials to test the application:
+
+Login: admin1
+Password: qwerty12345!
+
 ## Conclusion
 Enjoy exploring the restaurant_kitchen_service application. Add orders, create new positions, and manage your kitchen efficiently!
 
