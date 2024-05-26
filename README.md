@@ -34,37 +34,15 @@ loom demonstration of interface</a>
 Pagination is implemented on all pages to improve navigation and usability.
 Comprehensive tests have been written for both custom and core project features to ensure reliability.
 
-## Getting Started
-* Clone the repository:
-```
-git clone https://github.com/yourusername/restaurant_kitchen_service.git
-cd restaurant_kitchen_service
-```
-* Install dependencies:
-```
-pip install -r requirements.txt
-```
-* Apply migrations:
-```
-python manage.py migrate
-```
-* Create a superuser:
-```
-python manage.py createsuperuser
-```
-* Run the development server:
-```
-python manage.py runserver
-```
-* Access the application:
+## Check it out!
 
-Open your web browser and go to http://127.0.0.1:8000/
+[Restaurant Kitchen project deployed to Render](https://restaurant-kitchen-service-a082.onrender.com/)
 
-## Tests
-To run the tests, execute the following command:
-```
-python manage.py test
-```
+Use the following credentials to test the application:
+
+Login: admin1
+Password: qwerty12345!
+
 ## Conclusion
 Enjoy exploring the restaurant_kitchen_service application. Add orders, create new positions, and manage your kitchen efficiently!
 
