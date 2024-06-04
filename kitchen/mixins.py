@@ -6,7 +6,8 @@ from django.views.generic import View
 class LeadPositionRequiredMixin(View):
     def dispatch(self, request, *args, **kwargs):
         if not request.user.position or not request.user.position.lead_position:
-            raise PermissionDenied
+            if not request.user.is_staff:
+                raise PermissionDenied
 
         return super().dispatch(request, *args, **kwargs)
 
