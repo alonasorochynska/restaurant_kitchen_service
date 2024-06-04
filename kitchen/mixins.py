@@ -17,7 +17,7 @@ class LeadPositionRequiredMixin(View):
 
 class KitchenPositionRequiredMixin(View):
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.position or not request.user.position.lead_position:
+        if not request.user.position or not request.user.position.kitchen:
             raise PermissionDenied
 
         return super().dispatch(request, *args, **kwargs)
