@@ -40,8 +40,21 @@ Comprehensive tests have been written for both custom and core project features 
 
 Use the following credentials to test the application:
 
-Login: admin1
-Password: qwerty12345!
+Login: `admin1`
+Password: `qwerty12345!`
+
+## Installation
+
+```
+git clone https://github.com/alonasorochynska/restaurant_kitchen_service.git
+cd restaurant_kitchen_service
+python3 -m venv venv (mac) 
+python -m venv venv (win)
+source venv/bin/activate (mac)
+venv\Scripts\activate(win)
+pip install -r requirements.txt
+python manage.py runserver
+```
 
 ## Conclusion
 Enjoy exploring the restaurant_kitchen_service application. Add orders, create new positions, and manage your kitchen efficiently!
