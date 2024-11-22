@@ -9,8 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-import os
-import dj_database_url
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / "subdir".
@@ -21,12 +20,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "default-secret-key-if-not-set")
+SECRET_KEY = "django-insecure-o^410y+i&&6n*%e$!h%0)y2j!9o9a9-*1*#24#^am0l+&8)awx"
 
 # SECURITY WARNING: don"t run with debug turned on in production!
-DEBUG = os.environ.get("DJANGO_DEBUG", "") != "False"
+DEBUG = True
 
-ALLOWED_HOSTS = ["127.0.0.1", "restaurant-kitchen-service-a082.onrender.com"]
+ALLOWED_HOSTS = []
+
 
 # Application definition
 
@@ -46,7 +46,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "whitenoise.middleware.WhiteNoiseMiddleware",
     "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -89,9 +88,6 @@ DATABASES = {
     }
 }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-
-DATABASES["default"].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -122,7 +118,7 @@ LOGIN_REDIRECT_URL = "/"
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "Europe/Lisbon"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
 
