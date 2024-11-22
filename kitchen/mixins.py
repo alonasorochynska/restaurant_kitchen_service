@@ -5,8 +5,9 @@ from django.views.generic import View
 
 class LeadPositionRequiredMixin(View):
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.position.lead_position:
-            raise PermissionDenied
+        if not request.user.position or not request.user.position.lead_position:
+            if not request.user.is_staff:
+                raise PermissionDenied
 
         return super().dispatch(request, *args, **kwargs)
 
@@ -16,7 +17,7 @@ class LeadPositionRequiredMixin(View):
 
 class KitchenPositionRequiredMixin(View):
     def dispatch(self, request, *args, **kwargs):
-        if not request.user.position.kitchen:
+        if not request.user.position or not request.user.position.kitchen:
             raise PermissionDenied
 
         return super().dispatch(request, *args, **kwargs)
@@ -27,7 +28,7 @@ class KitchenPositionRequiredMixin(View):
 
 class NotKitchenPositionRequiredMixin(View):
     def dispatch(self, request, *args, **kwargs):
-        if request.user.position.kitchen:
+        if not request.user.position or request.user.position.kitchen:
             raise PermissionDenied
 
         return super().dispatch(request, *args, **kwargs)
